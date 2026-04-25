@@ -1,0 +1,22 @@
+<h1>{{ object.title }}</h1>
+
+<p>{{ object.description }}</p>
+<p>Жанр: {{ object.genre }}</p>
+<p>Средний рейтинг: {{ object.avg_rating }}</p>
+
+<hr>
+
+<h3>Отзывы</h3>
+
+{% for r in object.reviews.all %}
+    <p>{{ r.user }} ⭐ {{ r.mark }} - {{ r.text }}</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'add_review' object.id %}">
+    {% csrf_token %}
+    <input name="mark" type="number" min="1" max="5">
+    <textarea name="text"></textarea>
+    <button>Отправить</button>
+</form>
+{% endif %}

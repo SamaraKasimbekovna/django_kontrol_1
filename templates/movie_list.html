@@ -1,0 +1,25 @@
+<h1>🎬 CineBoard</h1>
+
+<a href="{% url 'movie_add' %}">➕ Добавить фильм</a>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Поиск...">
+    <button>Найти</button>
+</form>
+
+<!-- ФИЛЬТР -->
+<a href="?genre=Horror">#Ужасы</a>
+<a href="?genre=Drama">#Драма</a>
+
+<hr>
+
+{% for movie in object_list %}
+    <h2>
+        {{ movie.title }} ⭐ {{ movie.avg }}
+    </h2>
+
+    <a href="{% url 'movie_detail' movie.id %}">Подробнее</a>
+    <a href="{% url 'movie_edit' movie.id %}">Изменить</a>
+    <a href="{% url 'movie_delete' movie.id %}">Удалить</a>
+
+{% endfor %}
